@@ -27,6 +27,23 @@ def load_table():
 
 df = load_table()
 
-# Print results.
-for row in df.itertuples():
-    st.write(f"{row.col_0} has a :{row.channels}:")
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the data
+data = df
+
+# Create a figure with two subplots
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 6))
+
+# Create the first pie chart
+ax1.pie(data['histSpendAllShare'], labels=data['channels'], autopct='%1.1f%%')
+ax1.set_title('histSpendAllShare')
+
+# Create the second pie chart
+ax2.pie(data['optmSpendShareUnit'], labels=data['channels'], autopct='%1.1f%%')
+ax2.set_title('optmSpendShareUnit')
+
+# Create the Streamlit app
+st.title('My Streamlit App')
+st.write(fig)
